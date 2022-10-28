@@ -7,7 +7,7 @@ const Gallery = (props) => {
   const fetchMovies = async () => {
     try {
       let response = await fetch(
-        "http://www.omdbapi.com/?apikey=358e84b8&s=" + props.type
+        "http://www.omdbapi.com/?apikey=358e84b8&s=" + props.type + "&plot=full"
       );
       console.log(response);
       if (response.ok) {
@@ -15,10 +15,10 @@ const Gallery = (props) => {
         console.log(data);
         setMovies(data);
       } else {
-        alert("FETCH FAILED!");
+        console.log("FETCH FAILED!");
       }
     } catch (error) {
-      console.log("error:", error);
+      console.log("error: ", error);
     }
   };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Gallery from "./Gallery";
 import SearchResults from "./SearchResults";
 import Spinner from "./Spinner";
@@ -6,13 +6,12 @@ import Spinner from "./Spinner";
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchResponse, setSearchResponse] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    
+
     try {
       let response = await fetch(
         "http://www.omdbapi.com/?apikey=358e84b8&s=" + searchQuery
@@ -21,19 +20,24 @@ const HomePage = () => {
       if (response.ok) {
         let data = await response.json();
         setSearchResult(data);
-        setIsLoading(false);
-        setSearchResponse(data.Response)
-        /* console.log(data);
-        console.log(data.Response);
-        console.log(searchResponse); */
+        console.log(data);
+        console.log("this is searchResult " + searchResult);
+        console.log("this is searchQuery " + searchQuery);
+
+        setTimeout(() => {
+          setSearchQuery("");
+          setIsLoading(false);
+        }, 1000);
       } else {
-        alert("SEARCH FETCH FAILED");
+        setIsLoading(false);
+        setError(true);
       }
     } catch (error) {
       console.log("error:" + error);
+      setIsLoading(false);
+      setError(true);
+      setSearchQuery("");
     }
-    
-    setSearchQuery("");
   };
 
   return (
@@ -80,6 +84,8 @@ const HomePage = () => {
         </div>
       </div>
 
+      {isLoading && searchQuery !== "" && searchResult !== null && <Spinner />}
+
       {searchResult === null && (
         <div>
           <h1 className="text-white text-xl">Collections</h1>
@@ -89,17 +95,9 @@ const HomePage = () => {
         </div>
       )}
 
-      {isLoading === true && searchQuery !== "" && <Spinner />}
+      {searchResult !== null && <SearchResults searchResult={searchResult} />}
 
-      {searchResult !== null && searchResult !== undefined && (
-        <SearchResults searchResult={searchResult} />
-      )}
-
-      {searchResponse === false && (
-        <div>
-          <p className="text-white">non trovato</p>
-        </div>
-      )}
+      {error && <p className="text-white">nessun elemento da caricare</p>}
     </>
   );
 };

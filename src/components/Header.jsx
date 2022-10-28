@@ -1,6 +1,9 @@
+import { Link, useLocation } from "react-router-dom";
 import logo from "./logo/film-reel.png";
 
 const Header = () => {
+  const location = useLocation();
+
   return (
     <>
       <nav className="bg-gray-800">
@@ -48,51 +51,49 @@ const Header = () => {
               </button>
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="block h-8 w-auto lg:hidden"
-                  src={logo}
-                  alt="Your Company"
-                />
-                <img
-                  className="hidden h-8 w-auto lg:block"
-                  src={logo}
-                  alt="Your Company"
-                />
-                <p className="text-white px-2 text-2xl font-semibold tracking-wide font-mono hidden sm:block">
-                  My Movies
-                </p>
-              </div>
+              <Link to="/">
+                <div className="flex flex-shrink-0 items-center">
+                  <img
+                    className="block h-8 w-auto lg:hidden"
+                    src={logo}
+                    alt="Your Company"
+                  />
+                  <img
+                    className="hidden h-8 w-auto lg:block"
+                    src={logo}
+                    alt="Your Company"
+                  />
+                  <p className="text-white px-2 text-2xl font-semibold tracking-wide font-mono hidden sm:block">
+                    My Movies
+                  </p>
+                </div>
+              </Link>
+
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4 px-8">
-                  <a
-                    href="#"
-                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <Link
+                    to="/"
+                    className={
+                      location.pathname === "/"
+                        ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                        : "text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                    }
                     aria-current="page"
                   >
-                    Dashboard
-                  </a>
+                    Home
+                  </Link>
 
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <Link
+                    to="/favourites"
+                    className={
+                      location.pathname === "/favourites"
+                        ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                        : "text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 "
+                    }
+                    aria-current="page"
                   >
-                    Team
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Projects
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Calendar
-                  </a>
+                    My Fav
+                  </Link>
                 </div>
               </div>
             </div>
@@ -138,39 +139,6 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="space-y-1 px-2 pt-2 pb-3">
-            <a
-              href="#"
-              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page"
-            >
-              Dashboard
-            </a>
-
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Team
-            </a>
-
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Projects
-            </a>
-
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Calendar
-            </a>
           </div>
         </div>
       </nav>
