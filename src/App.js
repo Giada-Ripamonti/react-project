@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import Fav from "./components/Fav";
 import PageNotFound from "./components/PageNotFound";
 import MovieDetails from "./components/MovieDetails";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/favourites" element={<Fav />} />
             <Route path="*" element={<PageNotFound />} />
-            <Route path="/details/:movieID" element={<MovieDetails />}></Route>
+            <Route path="/details/:movieID" element={<MovieDetails />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </BrowserRouter>

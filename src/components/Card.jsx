@@ -1,15 +1,23 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AddToFavAction } from "../redux/actions/actions";
 
 const Card = ({ movie }) => {
 
+  const [favourite, setFavourite] = useState()
   const navigate = useNavigate()
 
+  const Dispatch = useDispatch()
+
+  const favSelected = () => setFavourite(movie)
+  
   return (
-    <div className="flex justify-center my-3 mr-3 w-60">
-      <div className="rounded-lg shadow-lg bg-gray-600 max-w-sm ">
-        <div className="w-60 h-96">
+    <div className="flex justify-center h-3/6">
+      <div className="rounded-lg shadow-lg bg-gray-600 my-3 mr-3 w-52 h-full mb-3">
+        <div className="w-60 h-auto">
           <img
-            className="rounded-t-lg min-h-full max-w-full"
+            className="rounded-t-lg h-80 w-52"
             src={movie.Poster}
             alt={movie.Title}
           />
@@ -18,7 +26,8 @@ const Card = ({ movie }) => {
         <div className="flex flex-col justify-between p-6 h-60">
           <button
             type="button"
-            className="rounded-full self-end bg-transparent p-1 text-gray-400 hover:text-white"
+            className={!favourite ? "rounded-full p-1 self-end bg-transparent text-gray-400 hover:text-white" : "rounded-full p-1 self-end bg-purple-600 text-white hover:bg-purple-400"}
+            onClick={() => {favSelected(); Dispatch(AddToFavAction(favourite))}}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +44,7 @@ const Card = ({ movie }) => {
               />
             </svg>
           </button>
-          <h5 className="text-white text-xl font-medium mb-2">{movie.Title}</h5>
+          <h5 className="text-white text-xl font-medium mb-1">{movie.Title}</h5>
           <p className="text-gray-300 text-base mb-4">year: {movie.Year}</p>
           <button
             type="button"

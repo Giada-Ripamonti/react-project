@@ -2,7 +2,7 @@ import Card from "./Card";
 
 const SearchResults = ({ searchResult }) => 
   searchResult.Response === "True" ? (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center">
       {searchResult.Search.map((movie) => (
         <Card key={movie.imdbID} movie={movie} />
       ))}
