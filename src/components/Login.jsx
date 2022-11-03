@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SetEmailAction, SetUsernameAction } from "../redux/actions/actions";
 
@@ -7,12 +7,19 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const loginName = useSelector((state) => state.user.name);
 
-  const Dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userEmail !== "" && userName !== "") {
+      console.log(userName);
+      console.log(userEmail);
+      dispatch(SetUsernameAction(userName));
+      dispatch(SetEmailAction(userEmail));
+    }
+  }, [userName, userEmail]);
 
   const handleSubmit = (e) => {
     e.prevevntDefault();
-    Dispatch(SetUsernameAction(userName));
-    Dispatch(SetEmailAction(userEmail));
   };
 
   return (

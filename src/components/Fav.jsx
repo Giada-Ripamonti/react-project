@@ -19,7 +19,7 @@ const Fav = () => {
           <div className="flex justify-center">
             {FavList.length > 0 ? (
               FavList.map((movie, i) => (
-                <>
+                <div key={i}>
                   <div className="flex my-4">
                     <h2 className="text-white text-xl mr-8">{movie.Title}</h2>
                     <button
@@ -45,7 +45,7 @@ const Fav = () => {
                       </svg>
                     </button>
                   </div>
-                </>
+                </div>
               ))
             ) : (
               <p className="text-gray-400 text-xl">

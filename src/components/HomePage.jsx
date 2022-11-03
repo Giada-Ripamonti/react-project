@@ -86,16 +86,14 @@ const HomePage = () => {
 
       {isLoading && searchQuery !== "" && searchResult !== null && <Spinner />}
 
-      {searchResult === null && (
+      {searchResult === null ? (
         <div>
           <h1 className="text-white text-xl">Collections</h1>
           <Gallery title="Final Fantasy" type="final%20fantasy" />
           <Gallery title="Harry Potter" type="harry%20potter" />
           <Gallery title="Avengers" type="avengers" />
         </div>
-      )}
-
-      {searchResult !== null && <SearchResults searchResult={searchResult} />}
+      ) : (<SearchResults searchResult={searchResult} />)}
 
       {error && <p className="text-white">nessun elemento da caricare</p>}
     </>

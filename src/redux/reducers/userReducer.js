@@ -1,7 +1,7 @@
 import { SET_USERNAME, SET_EMAIL } from "../actions/actions";
 
 const InitialState = {
-  name: "Giada",
+  name: "",
   email: "",
 };
 
