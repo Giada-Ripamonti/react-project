@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AddToFavAction } from "../redux/actions/actions";
 import { useEffect } from "react";
 
-const Card = ({ movie }) => {
+const Card = ({ movie }) => { 
   const [favourite, setFavourite] = useState();
 
   const navigate = useNavigate();
@@ -40,9 +40,7 @@ const Card = ({ movie }) => {
                 ? "rounded-full p-1 self-end bg-transparent text-gray-400 hover:text-white"
                 : "rounded-full p-1 self-end bg-purple-600 text-white hover:bg-purple-400"
             }
-            onClick={() => {
-              favSelected();
-            }}
+            onClick={favSelected}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

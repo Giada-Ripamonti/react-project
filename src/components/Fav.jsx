@@ -7,7 +7,7 @@ const Fav = () => {
   const loginName = useSelector((state) => state.user.name);
 
   const navigate = useNavigate();
-  const Dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -16,17 +16,17 @@ const Fav = () => {
           <h1 className="text-white text-2xl text-center my-5">
             Hi {loginName}, your favourite movies are: {FavList.length}
           </h1>
-          <div className="flex justify-center">
+          <div className="flex flex-col">
             {FavList.length > 0 ? (
               FavList.map((movie, i) => (
                 <div key={i}>
-                  <div className="flex my-4">
+                  <div className="flex my-4 justify-between my-2 pb-1 mx-auto border-solid border-b border-white">
                     <h2 className="text-white text-xl mr-8">{movie.Title}</h2>
                     <button
                       type="button"
                       className=" inline-block p-1 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                       onClick={() => {
-                        Dispatch(RemoveFavAction(i));
+                        dispatch(RemoveFavAction(i));
                       }}
                     >
                       <svg

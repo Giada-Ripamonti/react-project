@@ -5,21 +5,20 @@ import { SetEmailAction, SetUsernameAction } from "../redux/actions/actions";
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [submit, setSubmit] = useState(false);
   const loginName = useSelector((state) => state.user.name);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userEmail !== "" && userName !== "") {
-      console.log(userName);
-      console.log(userEmail);
+    if (submit === true) {
       dispatch(SetUsernameAction(userName));
       dispatch(SetEmailAction(userEmail));
     }
-  }, [userName, userEmail]);
+  }, [submit]);
 
   const handleSubmit = (e) => {
-    e.prevevntDefault();
+    e.preventDefault()
   };
 
   return (
@@ -33,14 +32,14 @@ const Login = () => {
           <button
             type="button"
             className="w-60 self-center inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-            onClick={() => loginName === ""}
+            /* onClick={setSubmit(false)} */
           >
             Log out
           </button>
         </div>
       ) : (
         <div className="block p-6 rounded-lg shadow-lg bg-gray-800 max-w-sm mx-auto mt-8">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={() => {setSubmit(true); handleSubmit()}}>
             <div className="form-group mb-6">
               <input
                 type="text"

@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { AddToFavAction } from "../redux/actions/actions";
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
+  const [favourite, setFavourite] = useState();
 
   const params = useParams();
+
+  const dispatch = useDispatch();
 
   const FetchDetails = async () => {
     try {
@@ -17,6 +22,7 @@ const MovieDetails = () => {
       if (response.ok) {
         let data = await response.json();
         setMovieDetails(data);
+        setFavourite(data);
         console.log(data);
         console.log(movieDetails);
       } else {
@@ -45,6 +51,7 @@ const MovieDetails = () => {
             <button
               type="button"
               className="my-10 inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+              onClick={dispatch(AddToFavAction(favourite))}
             >
               ADD TO FAV
             </button>
